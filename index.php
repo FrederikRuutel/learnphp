@@ -1,10 +1,19 @@
 <?php
-echo "Hello, World!"; // Prints Hello World message
+$test = 10; // integer
+$test = 3.1; // float
+$test = "Hello World"; // string
+$test = true; // boolean, bool. Tõeväärtus true/false\
+$test = null; // väärtus mis näitab väärtuse puudumist
+var_dump($test);
 
-$name = "Frederik"; // Variables käib $ sümboliga
-$age = 19;
+$test = [1, 2, "three", true];
+var_dump($test);
 
-echo " $age";
-$age = $age * 2 * 3 * 5 * 4; // Update the age variable with multipliers
-echo " $age"; 
+$test = new stdClass();
+$test->name = "Frederik";
+var_dump($test);
+
+$num1 = 10;
+$num2 = "10";
+var_dump($num1 === $num2);
 ?>
