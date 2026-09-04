@@ -1,19 +1,18 @@
 <?php
-$test = 10; // integer
-$test = 3.1; // float
-$test = "Hello World"; // string
-$test = true; // boolean, bool. Tõeväärtus true/false\
-$test = null; // väärtus mis näitab väärtuse puudumist
+$test = 10 + 2;
+$test = 10 * 2;
+$test = 10 / 2;
+
+$test++;
+$test--;
+
+$test = 10 + 2 / 4 * (5 + 17);
+
+$test %= 2;
+$test **= 3;
+$test = 2 ** 4;
 var_dump($test);
 
-$test = [1, 2, "three", true];
+$test = sqrt(16);
 var_dump($test);
-
-$test = new stdClass();
-$test->name = "Frederik";
-var_dump($test);
-
-$num1 = 10;
-$num2 = "10";
-var_dump($num1 === $num2);
 ?>
