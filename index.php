@@ -1,18 +1,22 @@
 <?php
-$test = 10 + 2;
-$test = 10 * 2;
-$test = 10 / 2;
-
-$test++;
-$test--;
-
-$test = 10 + 2 / 4 * (5 + 17);
-
-$test %= 2;
-$test **= 3;
-$test = 2 ** 4;
+$test = 'hello';
+$test = 'hello' . ' world';
 var_dump($test);
 
-$test = sqrt(16);
+$test .= '!';
 var_dump($test);
+
+$name = "Frederik";
+$age = 19;
+$test = $name . ' is ' . $age . ' years old.';
+var_dump($test);
+
+$test = 'hello\n\nworld'; // Topelt jutumarkides tootavad variableid
+$test = "hello\n\nworld";
+var_dump($test);
+
+$letter = 'a';
+$letter++;
+var_dump($letter);
+
 ?>
