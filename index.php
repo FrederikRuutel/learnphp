@@ -1,33 +1,44 @@
 <?php
 
-for($i=0; $i<10; $i++){
-    var_dump($i);
+function hello() {
+    var_dump('Hello World!');
 }
 
-for($i=2; $i>=1_000_000; $i--){
-    var_dump($i);
-}
-$time = time();
-$n = 0;
-while($time+1 > time()) {
-    $n++;
-}
+hello();
+hello();
+hello();
 
-var_dump($n);
-
-while(false){
-    var_dump('WHILE');
+function helloName($name) {
+    var_dump("Hello, $name!");
 }
 
-do {
-    var_dump('DO');
-} while(false);
+helloName('Frederik');
 
-
-
-$fruits = ['Apple', 'Peach', 'Nigga'];
-
-foreach($fruits as $fruits) {
-    var_dump($fruits);
+function helloNameAndAge($name, $age) {
+    var_dump("Hello, $name, who is $age yo.");
 }
-?>
+
+helloNameAndAge('Frederik', '19');
+helloNameAndAge('karl', 18);
+
+$test = function() {
+    echo("Tere!");
+};
+
+var_dump($test);
+
+$numbers = [1,2,3,4,5];
+$squares = array_map(function ($n) {
+    return $n * $n;
+}, $numbers);
+var_dump($squares);
+
+function cube($a) {
+    return $a * $a * $a;
+};
+var_dump(cube(4));
+
+$answer = cube(5);
+
+$text = "Cubes of 5 is $answer";
+echo $text;
