@@ -99,4 +99,9 @@ class PublicController {
         $title = 'Forms';
         view('forms');
     }
+
+    public function answer() {
+        dump($_GET);
+        dump($_POST);
+    }
 }
