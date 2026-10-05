@@ -24,6 +24,11 @@ class PublicController
         view('us', compact('title', 'articles'));
     }
 
+    public function tech()
+    {
+        view('tech');
+    }
+
     public function forms()
     {
         view('forms');

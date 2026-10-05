@@ -1,13 +1,16 @@
 <?php
 
-session_start();
-
-if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js)$/', $_SERVER["REQUEST_URI"])) {
-    return false;    // serve the requested resource as-is.
+// Let PHP's development server serve existing public assets directly.
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$publicFile = realpath(__DIR__ . rawurldecode($path));
+if (PHP_SAPI === 'cli-server' && $publicFile !== false
+    && str_starts_with($publicFile, __DIR__ . DIRECTORY_SEPARATOR)
+    && is_file($publicFile) && strtolower(pathinfo($publicFile, PATHINFO_EXTENSION)) !== 'php') {
+    return false;
 }
 
-
-require __DIR__ . '/../vendor/autoload.php';
+session_start();
+require __DIR__ . '/../bootstrap.php';
 
 require __DIR__ . '/../helpers.php';
 require __DIR__ . '/../routes.php';
@@ -24,5 +27,6 @@ if($match) {
         $controller->$method();
     }
 } else {
-    echo 404;
+    http_response_code(404);
+    echo '404 Not Found';
 }
