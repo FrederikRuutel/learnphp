@@ -19,6 +19,7 @@ class PublicController
     public function us()
     {
         $articles = Article::all();
+        dump($articles);
         $title = 'U.S';
         view('us', compact('title', 'articles'));
     }
