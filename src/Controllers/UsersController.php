@@ -32,6 +32,69 @@ class UsersController
         }
     }
 
+    public function create()
+    {
+        $title = 'New User';
+        $user = new User();
+        $errors = [];
+        view('users/create', compact('title', 'user', 'errors'));
+    }
+
+    public function store()
+    {
+        if (!$this->validToken()) {
+            return;
+        }
+
+        $user = new User();
+        $errors = $this->validateUser($user, true);
+        if ($errors) {
+            http_response_code(422);
+            $title = 'New User';
+            view('users/create', compact('title', 'user', 'errors'));
+            return;
+        }
+
+        $user->save();
+        redirect('/admin/users');
+    }
+
+    private function validateUser(User $user, bool $creating = false): array
+    {
+        $user->name = trim(is_string($_POST['name'] ?? null) ? $_POST['name'] : '');
+        $user->email = trim(is_string($_POST['email'] ?? null) ? $_POST['email'] : '');
+        $password = is_string($_POST['password'] ?? null) ? $_POST['password'] : '';
+        $confirmation = is_string($_POST['password_confirm'] ?? null) ? $_POST['password_confirm'] : '';
+        $errors = [];
+
+        if ($user->name === '' || mb_strlen($user->name) > 255) {
+            $errors[] = 'Enter a name between 1 and 255 characters.';
+        }
+        if (!filter_var($user->email, FILTER_VALIDATE_EMAIL) || strlen($user->email) > 254) {
+            $errors[] = 'Enter a valid email address.';
+        } else {
+            foreach (User::where('email', $user->email) as $existingUser) {
+                if ((int) $existingUser->id !== (int) $user->id) {
+                    $errors[] = 'This email address is already in use.';
+                }
+            }
+        }
+
+        if ($creating || $password !== '' || $confirmation !== '') {
+            if (strlen($password) < 8 || strlen($password) > 72) {
+                $errors[] = 'Use a password between 8 and 72 bytes.';
+            }
+            if ($password !== $confirmation) {
+                $errors[] = 'The passwords do not match.';
+            }
+            if (!$errors) {
+                $user->password = password_hash($password, PASSWORD_BCRYPT);
+            }
+        }
+
+        return $errors;
+    }
+
     private function findUser()
     {
         $id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT, [
