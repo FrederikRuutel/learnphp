@@ -91,6 +91,36 @@ class UsersController
         redirect('/admin/users');
     }
 
+    public function delete()
+    {
+        $user = $this->findUser();
+        if ($user) {
+            $title = 'Delete User';
+            view('users/delete', compact('title', 'user'));
+        }
+    }
+
+    public function destroy()
+    {
+        if (!$this->validToken()) {
+            return;
+        }
+        $user = $this->findUser();
+        if (!$user) {
+            return;
+        }
+
+        $user->delete();
+        if ((int) $_SESSION['userID'] === (int) $user->id) {
+            unset($_SESSION['userID'], $_SESSION['users_csrf_token']);
+            session_regenerate_id(true);
+            redirect('/login');
+            return;
+        }
+
+        redirect('/admin/users');
+    }
+
     private function validateUser(User $user, bool $creating = false): array
     {
         $user->name = trim(is_string($_POST['name'] ?? null) ? $_POST['name'] : '');

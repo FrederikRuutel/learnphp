@@ -20,6 +20,7 @@
           <td>
             <a href="/admin/users/view?id=<?= (int) $user->id ?>" class="btn btn-info">View</a>
             <a href="/admin/users/edit?id=<?= (int) $user->id ?>" class="btn btn-warning">Edit</a>
+            <a href="/admin/users/delete?id=<?= (int) $user->id ?>" class="btn btn-danger">Delete</a>
           </td>
         </tr>
       <?php endforeach; ?>

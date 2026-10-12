@@ -9,6 +9,7 @@
     </tbody>
   </table>
   <a href="/admin/users/edit?id=<?= (int) $user->id ?>" class="btn btn-warning">Edit</a>
+  <a href="/admin/users/delete?id=<?= (int) $user->id ?>" class="btn btn-danger">Delete</a>
   <a href="/admin/users" class="btn btn-secondary">Back to users</a>
 </main>
 <?php include __DIR__ . '/../partials/footer.php'; ?>
