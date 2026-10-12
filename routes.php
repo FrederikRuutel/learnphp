@@ -34,3 +34,5 @@ Router::get('/admin/users', [UsersController::class, 'index']);
 Router::get('/admin/users/view', [UsersController::class, 'view']);
 Router::get('/admin/users/create', [UsersController::class, 'create']);
 Router::post('/admin/users', [UsersController::class, 'store']);
+Router::get('/admin/users/edit', [UsersController::class, 'edit']);
+Router::post('/admin/users/edit', [UsersController::class, 'update']);

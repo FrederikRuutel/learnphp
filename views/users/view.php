@@ -8,6 +8,7 @@
       <tr><th scope="row">Email</th><td><?= htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8') ?></td></tr>
     </tbody>
   </table>
+  <a href="/admin/users/edit?id=<?= (int) $user->id ?>" class="btn btn-warning">Edit</a>
   <a href="/admin/users" class="btn btn-secondary">Back to users</a>
 </main>
 <?php include __DIR__ . '/../partials/footer.php'; ?>

@@ -19,6 +19,7 @@
           <td><?= htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8') ?></td>
           <td>
             <a href="/admin/users/view?id=<?= (int) $user->id ?>" class="btn btn-info">View</a>
+            <a href="/admin/users/edit?id=<?= (int) $user->id ?>" class="btn btn-warning">Edit</a>
           </td>
         </tr>
       <?php endforeach; ?>

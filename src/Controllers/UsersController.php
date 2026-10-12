@@ -59,6 +59,38 @@ class UsersController
         redirect('/admin/users');
     }
 
+    public function edit()
+    {
+        $user = $this->findUser();
+        if ($user) {
+            $title = 'Edit User';
+            $errors = [];
+            view('users/edit', compact('title', 'user', 'errors'));
+        }
+    }
+
+    public function update()
+    {
+        if (!$this->validToken()) {
+            return;
+        }
+        $user = $this->findUser();
+        if (!$user) {
+            return;
+        }
+
+        $errors = $this->validateUser($user);
+        if ($errors) {
+            http_response_code(422);
+            $title = 'Edit User';
+            view('users/edit', compact('title', 'user', 'errors'));
+            return;
+        }
+
+        $user->save();
+        redirect('/admin/users');
+    }
+
     private function validateUser(User $user, bool $creating = false): array
     {
         $user->name = trim(is_string($_POST['name'] ?? null) ? $_POST['name'] : '');
@@ -83,6 +115,9 @@ class UsersController
         if ($creating || $password !== '' || $confirmation !== '') {
             if (strlen($password) < 8 || strlen($password) > 72) {
                 $errors[] = 'Use a password between 8 and 72 bytes.';
+            }
+            if (str_contains($password, chr(0))) {
+                $errors[] = 'The password contains an invalid character.';
             }
             if ($password !== $confirmation) {
                 $errors[] = 'The passwords do not match.';
