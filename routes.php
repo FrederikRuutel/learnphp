@@ -31,3 +31,4 @@ Router::post('/login', [AuthController::class, 'login']);
 Router::get('/logout', [AuthController::class, 'logout']);
 
 Router::get('/admin/users', [UsersController::class, 'index']);
+Router::get('/admin/users/view', [UsersController::class, 'view']);

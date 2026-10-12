@@ -7,6 +7,7 @@
         <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -15,10 +16,13 @@
           <td><?= (int) $user->id ?></td>
           <td><?= htmlspecialchars($user->name, ENT_QUOTES, 'UTF-8') ?></td>
           <td><?= htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8') ?></td>
+          <td>
+            <a href="/admin/users/view?id=<?= (int) $user->id ?>" class="btn btn-info">View</a>
+          </td>
         </tr>
       <?php endforeach; ?>
       <?php if (!$users): ?>
-        <tr><td colspan="3">No users found.</td></tr>
+        <tr><td colspan="4">No users found.</td></tr>
       <?php endif; ?>
     </tbody>
   </table>

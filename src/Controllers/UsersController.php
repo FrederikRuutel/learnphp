@@ -23,6 +23,15 @@ class UsersController
         view('users/index', compact('title', 'users'));
     }
 
+    public function view()
+    {
+        $user = $this->findUser();
+        if ($user) {
+            $title = 'View User';
+            view('users/view', compact('title', 'user'));
+        }
+    }
+
     private function findUser()
     {
         $id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT, [
