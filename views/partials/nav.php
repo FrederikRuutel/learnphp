@@ -52,6 +52,9 @@
           <a class="nav-item nav-link link-body-emphasis<?= $currentPath === '/tech' ? ' active' : '' ?>" href="/tech">Technology</a>
           <a class="nav-item nav-link link-body-emphasis<?= $currentPath === '/forms' ? ' active' : '' ?>" href="/forms">Forms</a>
           <a class="nav-item nav-link link-body-emphasis<?= $currentPath === '/admin/articles' ? ' active' : '' ?>" href="/admin/articles">Articles</a>
+          <?php if (auth()): ?>
+            <a class="nav-item nav-link link-body-emphasis<?= str_starts_with($currentPath, '/admin/users') ? ' active' : '' ?>" href="/admin/users">Users</a>
+          <?php endif; ?>
           <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>
           <a class="nav-item nav-link link-body-emphasis" href="#">Politics</a>
           <a class="nav-item nav-link link-body-emphasis" href="#">Opinion</a>
